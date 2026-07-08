@@ -1,5 +1,9 @@
 <?php
 session_start();
+include_once '../includes/connection.php';
+
+$sql = "SELECT * FROM activiteiten";
+$activiteiten = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +34,7 @@ session_start();
             <h1>Nieuwe activiteit toevoegen</h1>
             <p class="hero-text">Vul hieronder de details in voor een nieuwe excursie.</p>
 
-            <form class="admin-form" action="" method="post">
+            <form class="admin-form" action="../add-activiteit.php" method="post">
               <label class="admin-field">
                 <span>Naam activiteit</span>
                 <input type="text" name="activiteit" placeholder="Bijv. Wandeltocht door de binnenstad" />
@@ -55,6 +59,47 @@ session_start();
 
               <button class="btn btn-primary full-width" type="submit">Activiteit toevoegen</button>
             </form>
+
+            <div class="table-section">
+              <div class="table-heading">
+                <h2>Bestaande activiteiten</h2>
+                <p>Hier verschijnen je toegevoegde activiteiten.</p>
+              </div>
+
+              <div class="table-wrap">
+                <table class="activity-table">
+                  <thead>
+                    <tr>
+                      <th>Activiteit</th>
+                      <th>Datum</th>
+                      <th>Tijd</th>
+                      <th>Acties</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($activiteiten as $activiteit): ?>
+                    <tr>
+                      <td>
+                        <?= $activiteit['naam'] ?>
+                      </td>
+                      <td>
+                        <?= $activiteit['datum'] ?>
+                      </td>
+                      <td>
+                        <?= $activiteit['tijd'] ?>
+                      </td>
+                      <td>
+                        <div class="table-actions">
+                          <button class="table-btn edit" type="button">Bewerken</button>
+                          <button class="table-btn remove" type="button">Verwijderen</button>
+                        </div>
+                      </td>
+                    </tr>
+                      <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           <?php endif; ?>
         </section>
       </main>

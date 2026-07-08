@@ -335,6 +335,72 @@ h1 {
   margin-top: 1rem;
 }
 
+.table-section {
+  margin-top: 1.4rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.table-heading h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+}
+
+.table-heading p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.activity-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.activity-table th,
+.activity-table td {
+  text-align: left;
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+.activity-table th {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.table-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.table-btn.edit {
+  background: var(--panel-strong);
+  color: var(--accent-strong);
+}
+
+.table-btn.remove {
+  background: #fde7e7;
+  color: #b23b3b;
+}
+
 .admin-grid {
   display: grid;
   gap: 0.9rem;
