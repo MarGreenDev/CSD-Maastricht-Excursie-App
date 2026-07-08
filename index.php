@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'includes/connection.php';
 ?>
 
@@ -27,6 +28,7 @@ include_once 'includes/connection.php';
         <nav class="topnav">
           <a href="#activities">Activiteiten</a>
           <a href="#auth">Doe mee</a>
+          <span><?= $_SESSION["naam"] ?></span>
         </nav>
       </header>
 
@@ -113,14 +115,14 @@ include_once 'includes/connection.php';
           <div class="auth-card">
             <p class="eyebrow">Account</p>
             <h2>Log in om je favorieten op te slaan</h2>
-            <form class="auth-form" >
-              <label for="login-email">Email</label>
-              <input id="login-email" type="email" placeholder="student@maastricht.nl" />
+            <form class="auth-form" action="login.php" method="post">
+              <label for="loginEmail">Email</label>
+              <input name="loginEmail" id="loginEmail" type="email" placeholder="student@maastricht.nl" />
 
-              <label for="login-password">Password</label>
-              <input id="login-password" type="password" placeholder="••••••••" />
+              <label for="loginPassword">Password</label>
+              <input name="loginPassword" id="loginPassword" type="password" placeholder="••••••••" />
 
-              <button class="btn btn-primary full-width" type="submit">Inloggen</button>
+              <button name="login" class="btn btn-primary full-width" type="submit">Inloggen</button>
             </form>
           </div>
 
