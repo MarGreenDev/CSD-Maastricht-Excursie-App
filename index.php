@@ -1,3 +1,7 @@
+<?php
+include_once 'includes/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -109,7 +113,7 @@
           <div class="auth-card">
             <p class="eyebrow">Account</p>
             <h2>Log in om je favorieten op te slaan</h2>
-            <form class="auth-form">
+            <form class="auth-form" >
               <label for="login-email">Email</label>
               <input id="login-email" type="email" placeholder="student@maastricht.nl" />
 
@@ -123,17 +127,17 @@
           <div class="auth-card alt-card">
             <p class="eyebrow">Nieuw hier?</p>
             <h2>Maak een account aan</h2>
-            <form class="auth-form">
-              <label for="register-name">Volledige naam</label>
-              <input id="register-name" type="text" placeholder="Jouw naam" />
+            <form class="auth-form" action="register.php" method="post">
+              <label for="registerName">Volledige naam</label>
+              <input name="registerName" id="registerName" type="text" placeholder="Jouw naam" />
 
-              <label for="register-email">Email</label>
-              <input id="register-email" type="email" placeholder="you@example.com" />
+              <label for="registerEmail">Email</label>
+              <input name="registerEmail" id="registerEmail" type="email" placeholder="you@example.com" />
 
-              <label for="register-password">Wachtwoord</label>
-              <input id="register-password" type="password" placeholder="Maak een wachtwoord" />
+              <label for="registerPassword">Wachtwoord</label>
+              <input name="registerPassword" id="registerPassword" type="password" placeholder="Maak een wachtwoord" />
 
-              <button class="btn btn-secondary full-width" type="submit">Registreren</button>
+              <button name="register" class="btn btn-secondary full-width" type="submit">Registreren</button>
             </form>
           </div>
         </section>
