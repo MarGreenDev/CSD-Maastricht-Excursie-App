@@ -314,6 +314,57 @@ h1 {
   padding: 0.5rem 0 0.3rem;
 }
 
+.admin-page {
+  display: flex;
+  justify-content: center;
+  padding: 0.4rem 0 1.2rem;
+}
+
+.admin-card {
+  width: min(640px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.admin-form {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.admin-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.admin-field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.admin-field span {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.admin-field input,
+.admin-field textarea {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.8rem 0.9rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text);
+  font: inherit;
+}
+
+.admin-field textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
 @media (max-width: 699px) {
   .menu-toggle {
     display: inline-flex;
@@ -343,6 +394,10 @@ h1 {
   .hero {
     grid-template-columns: 1.4fr 0.9fr;
     align-items: center;
+  }
+
+  .admin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .activity-grid {

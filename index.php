@@ -54,16 +54,27 @@ include_once 'includes/connection.php';
               <a class="btn btn-secondary" href="#activities">Bekijk activiteiten</a>
             </div>
           </div>
-
-          <div class="hero-card">
-            <h2>Waarom studenten het leuk vinden</h2>
-            <ul>
-              <li>Makkelijk om onderweg te bekijken</li>
-              <li>Uitgekozen plekken met lokale sfeer</li>
-              <li>Perfect voor dagtripjes en groepsplannen</li>
-            </ul>
+          <section id="auth" class="auth-section">
+          <div class="auth-card">
+            <p class="eyebrow">Account</p>
+            <h2>Blijf onderweg inloggen</h2>
+            <p class="hero-text">Log in of maak een account om je favoriete plekken te bewaren.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="login.php">Inloggen</a>
+              <a class="btn btn-secondary" href="register.php">Registreren</a>
+            </div>
           </div>
         </section>
+
+    </section>
+    <div class="hero-card">
+      <h2>Waarom studenten het leuk vinden</h2>
+      <ul>
+        <li>Makkelijk om onderweg te bekijken</li>
+        <li>Uitgekozen plekken met lokale sfeer</li>
+        <li>Perfect voor dagtripjes en groepsplannen</li>
+      </ul>
+    </div>
 
         <section class="highlights" aria-label="Trip highlights">
           <article>
@@ -119,17 +130,7 @@ include_once 'includes/connection.php';
           </div>
         </section>
 
-        <section id="auth" class="auth-section">
-          <div class="auth-card">
-            <p class="eyebrow">Account</p>
-            <h2>Blijf onderweg inloggen</h2>
-            <p class="hero-text">Log in of maak een account om je favoriete plekken te bewaren.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="login.php">Inloggen</a>
-              <a class="btn btn-secondary" href="register.php">Registreren</a>
-            </div>
-          </div>
-        </section>
+        
       </main>
 
       <footer class="footer">
