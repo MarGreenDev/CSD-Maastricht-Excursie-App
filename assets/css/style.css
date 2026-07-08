@@ -41,6 +41,7 @@ img {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0 1.4rem;
+  position: relative;
 }
 
 .brand {
@@ -58,12 +59,42 @@ img {
 .topnav {
   display: flex;
   gap: 0.9rem;
+  align-items: center;
 }
 
 .topnav a {
   color: var(--muted);
   text-decoration: none;
   font-size: 0.95rem;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: transparent;
+  border: none;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 1.25rem;
+  height: 2px;
+  background: var(--text);
+  border-radius: 999px;
+}
+
+.user-name {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.logout-btn {
+  color: var(--accent-strong);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .hero {
@@ -247,9 +278,65 @@ h1 {
   margin-top: 0.2rem;
 }
 
+.auth-page {
+  display: grid;
+  gap: 1rem;
+  padding: 0.5rem 0 1.2rem;
+}
+
+.auth-hero {
+  padding: 0.2rem 0 0.2rem;
+}
+
+.auth-stack {
+  max-width: 520px;
+}
+
+.message {
+  color: var(--accent-strong);
+  font-weight: 600;
+  margin: 0.2rem 0 0;
+}
+
+.alt-link {
+  margin-top: 0.8rem;
+  color: var(--muted);
+}
+
+.alt-link a {
+  color: var(--accent-strong);
+  font-weight: 600;
+  text-decoration: none;
+}
+
 .footer {
   text-align: center;
   padding: 0.5rem 0 0.3rem;
+}
+
+@media (max-width: 699px) {
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .topnav {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 0.8rem;
+    box-shadow: var(--shadow);
+    z-index: 10;
+  }
+
+  .topnav.open {
+    display: flex;
+  }
 }
 
 @media (min-width: 700px) {

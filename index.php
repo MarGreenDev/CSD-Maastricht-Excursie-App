@@ -24,11 +24,19 @@ include_once 'includes/connection.php';
   <body>
     <div class="page-shell">
       <header class="topbar">
-        <a class="brand" href="#">Maastricht<span>Trip</span></a>
-        <nav class="topnav">
-          <a href="#activities">Activiteiten</a>
-          <a href="#auth">Doe mee</a>
-          <span><?= $_SESSION["naam"] ?></span>
+        <a class="brand" href="index.php">Maastricht<span>Trip</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Menu openen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="topnav" id="site-nav">
+          <a href="index.php#activities">Activiteiten</a>
+          <a href="index.php#auth">Doe mee</a>
+          <?php if (!empty($_SESSION["naam"])): ?>
+            <span class="user-name"><?= htmlspecialchars($_SESSION["naam"]) ?></span>
+            <a class="logout-btn" href="logout.php">Uitloggen</a>
+          <?php endif; ?>
         </nav>
       </header>
 
@@ -114,33 +122,12 @@ include_once 'includes/connection.php';
         <section id="auth" class="auth-section">
           <div class="auth-card">
             <p class="eyebrow">Account</p>
-            <h2>Log in om je favorieten op te slaan</h2>
-            <form class="auth-form" action="login.php" method="post">
-              <label for="loginEmail">Email</label>
-              <input name="loginEmail" id="loginEmail" type="email" placeholder="student@maastricht.nl" />
-
-              <label for="loginPassword">Password</label>
-              <input name="loginPassword" id="loginPassword" type="password" placeholder="••••••••" />
-
-              <button name="login" class="btn btn-primary full-width" type="submit">Inloggen</button>
-            </form>
-          </div>
-
-          <div class="auth-card alt-card">
-            <p class="eyebrow">Nieuw hier?</p>
-            <h2>Maak een account aan</h2>
-            <form class="auth-form" action="register.php" method="post">
-              <label for="registerName">Volledige naam</label>
-              <input name="registerName" id="registerName" type="text" placeholder="Jouw naam" />
-
-              <label for="registerEmail">Email</label>
-              <input name="registerEmail" id="registerEmail" type="email" placeholder="you@example.com" />
-
-              <label for="registerPassword">Wachtwoord</label>
-              <input name="registerPassword" id="registerPassword" type="password" placeholder="Maak een wachtwoord" />
-
-              <button name="register" class="btn btn-secondary full-width" type="submit">Registreren</button>
-            </form>
+            <h2>Blijf onderweg inloggen</h2>
+            <p class="hero-text">Log in of maak een account om je favoriete plekken te bewaren.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="login.php">Inloggen</a>
+              <a class="btn btn-secondary" href="register.php">Registreren</a>
+            </div>
           </div>
         </section>
       </main>
@@ -149,5 +136,17 @@ include_once 'includes/connection.php';
         <p>Maastricht Excursie App • Gemaakt voor nieuwsgierige studenten</p>
       </footer>
     </div>
+
+    <script>
+      const menuToggle = document.querySelector('.menu-toggle');
+      const siteNav = document.getElementById('site-nav');
+
+      if (menuToggle && siteNav) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = siteNav.classList.toggle('open');
+          menuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
+    </script>
   </body>
 </html>
