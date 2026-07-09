@@ -259,15 +259,26 @@ h1 {
   font-size: 1.4rem;
 }
 
-.activity-pill {
+.favorite-btn {
+  border: none;
+  padding: 0.45rem 0.75rem;
   border-radius: 999px;
   background: var(--panel-strong);
   color: var(--accent-strong);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 0.35rem 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.favorite-btn:hover,
+.favorite-btn:focus-visible {
+  transform: scale(1.05);
+  background: rgba(95, 179, 109, 0.16);
+  outline: none;
 }
 
 .datum-tijd {
@@ -365,6 +376,34 @@ body.modal-open {
 
 .modal-meta {
   margin-top: 0.25rem;
+}
+
+.attendee-section {
+  margin-top: 0.25rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--border);
+}
+
+.attendee-section h4 {
+  margin: 0 0 0.55rem;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.attendee-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.attendee-list li {
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px;
+  background: rgba(95, 179, 109, 0.08);
+  color: var(--text);
+  font-size: 0.94rem;
 }
 
 @media (max-width: 600px) {

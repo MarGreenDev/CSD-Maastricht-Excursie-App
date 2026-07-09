@@ -116,7 +116,12 @@ include_once 'includes/connection.php';
                 data-time="<?= htmlspecialchars($displayTime, ENT_QUOTES, 'UTF-8') ?>">
                 <div class="activity-card__top">
                   <div class="activity-icon">🏛️</div>
-                  <span class="activity-pill">Bekijk</span>
+                  <form action="add-favorite.php" method="post">
+                    <input type="hidden" name="activiteit_id" value="<?= $row['id'] ?>">
+                    <button id="favorite-button" class="favorite-btn" type="submit" aria-label="Voeg toe aan favorieten">
+                      <span aria-hidden="true">Ik ga!</span>
+                    </button>
+                  </form>
                 </div>
                 <h3><?= htmlspecialchars($row['naam']) ?></h3>
                 <p><?= htmlspecialchars($row['omschrijving']) ?></p>
@@ -137,7 +142,7 @@ include_once 'includes/connection.php';
           }
           ?>
 
-          
+
         </div>
       </section>
 
@@ -166,6 +171,15 @@ include_once 'includes/connection.php';
             <span class="meta-label">Tijd</span>
             <strong id="activityModalTime"></strong>
           </span>
+        </div>
+        <div class="attendee-section">
+          <h4>Wie gaat er mee?</h4>
+          <ul class="attendee-list">
+            <li>Lisa van der Meer</li>
+            <li>Sam de Jong</li>
+            <li>Noah Peters</li>
+            <li>Mila Smit</li>
+          </ul>
         </div>
       </div>
     </div>
