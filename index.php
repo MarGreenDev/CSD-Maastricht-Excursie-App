@@ -93,8 +93,8 @@ include_once 'includes/connection.php';
 
       <section id="activities" class="activities-section">
         <div class="section-heading">
-          <p class="eyebrow">Topactiviteiten</p>
-          <h2>Vijf ervaringen die je reisplanner verdienen</h2>
+          <p class="eyebrow">Geplande activiteiten</p>
+          <h2>Ontdek wat er binnenkort op de planning staat</h2>
         </div>
 
         <div class="activity-grid">
@@ -140,9 +140,14 @@ include_once 'includes/connection.php';
 
           <?php
             }
+          } else {
+          ?>
+            <div class="empty-state" role="status">
+              <p>Er zijn nog geen geplande activiteiten. Kom later terug om je dag te plannen!</p>
+            </div>
+          <?php
           }
           ?>
-
 
         </div>
       </section>

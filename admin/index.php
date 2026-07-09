@@ -4,6 +4,24 @@ include_once '../includes/connection.php';
 
 $sql = "SELECT * FROM activiteiten";
 $activiteiten = $conn->query($sql);
+
+$userSql = "SELECT id, naam, email, is_admin FROM users ORDER BY naam";
+$users = $conn->query($userSql);
+
+$currentUserIsAdmin = false;
+if (isset($_SESSION['user_id'])) {
+    $currentUserId = (int) $_SESSION['user_id'];
+    $stmt = $conn->prepare('SELECT is_admin FROM users WHERE id = ? LIMIT 1');
+    if ($stmt) {
+        $stmt->bind_param('i', $currentUserId);
+        $stmt->execute();
+        $stmt->bind_result($isAdmin);
+        if ($stmt->fetch()) {
+            $currentUserIsAdmin = intval($isAdmin) === 1;
+        }
+        $stmt->close();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +44,7 @@ $activiteiten = $conn->query($sql);
             <p class="eyebrow">Toegang</p>
             <h1>Log in om activiteiten toe te voegen.</h1>
             <p class="hero-text">Deze pagina is alleen beschikbaar voor beheerders.</p>
-          <?php elseif ((int)$_SESSION["user_id"] !== 1): ?>
+          <?php elseif ((int)$_SESSION["user_id"] !== 1 && !$currentUserIsAdmin): ?>
             <p class="eyebrow">Toegang geweigerd</p>
             <h1>Jij bent hier niet welkom.</h1>
           <?php else: ?>
@@ -90,7 +108,7 @@ $activiteiten = $conn->query($sql);
                       </td>
                       <td>
                         <div class="table-actions">
-                          <button class="table-btn edit" type="button">Bewerken</button>
+                          
                           <button class="table-btn remove" type="button">Verwijderen</button>
                         </div>
                       </td>
@@ -100,9 +118,72 @@ $activiteiten = $conn->query($sql);
                 </table>
               </div>
             </div>
+
+            <div class="table-section">
+              <div class="table-heading">
+                <h2>Gebruikers</h2>
+                <p>Alle geregistreerde gebruikers in de database.</p>
+              </div>
+
+              <label class="admin-field">
+                <span>Zoeken</span>
+                <input id="userSearch" type="search" placeholder="Zoek op naam of email" />
+              </label>
+
+              <div class="table-wrap">
+                <table class="activity-table" id="userTable">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Naam</th>
+                      <th>Email</th>
+                      <th>Is admin</th>
+                      <th>Acties</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($users as $user): ?>
+                    <tr>
+                      <td><?= htmlspecialchars($user['id']) ?></td>
+                      <td><?= htmlspecialchars($user['naam']) ?></td>
+                      <td><?= htmlspecialchars($user['email']) ?></td>
+                      <td><?= intval($user['is_admin']) === 1 ? 'Ja' : 'Nee' ?></td>
+                      <td>
+                        <div class="table-actions">
+                          <?php if (intval($user['is_admin']) === 1): ?>
+                            <button class="table-btn edit" type="button" disabled>Admin</button>
+                          <?php else: ?>
+                            <form action="promote-user.php" method="post">
+                              <input type="hidden" name="user_id" value="<?= htmlspecialchars($user['id']) ?>" />
+                              <button class="table-btn edit" type="submit">Maak admin</button>
+                            </form>
+                          <?php endif; ?>
+                        </div>
+                      </td>
+                    </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           <?php endif; ?>
         </section>
       </main>
     </div>
+
+    <script>
+      const userSearch = document.getElementById('userSearch');
+      const userTable = document.getElementById('userTable');
+
+      if (userSearch && userTable) {
+        userSearch.addEventListener('input', () => {
+          const term = userSearch.value.toLowerCase();
+          userTable.querySelectorAll('tbody tr').forEach((row) => {
+            const rowText = row.textContent.toLowerCase();
+            row.style.display = rowText.includes(term) ? '' : 'none';
+          });
+        });
+      }
+    </script>
   </body>
 </html>
