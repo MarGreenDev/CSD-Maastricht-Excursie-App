@@ -110,6 +110,7 @@ include_once 'includes/connection.php';
           ?>
 
               <article class="activity-card" role="button" tabindex="0"
+                data-id="<?= htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') ?>"
                 data-name="<?= htmlspecialchars($row['naam'], ENT_QUOTES, 'UTF-8') ?>"
                 data-description="<?= htmlspecialchars($row['omschrijving'], ENT_QUOTES, 'UTF-8') ?>"
                 data-date="<?= htmlspecialchars($displayDate, ENT_QUOTES, 'UTF-8') ?>"
@@ -174,12 +175,7 @@ include_once 'includes/connection.php';
         </div>
         <div class="attendee-section">
           <h4>Wie gaat er mee?</h4>
-          <ul class="attendee-list">
-            <li>Lisa van der Meer</li>
-            <li>Sam de Jong</li>
-            <li>Noah Peters</li>
-            <li>Mila Smit</li>
-          </ul>
+          <ul class="attendee-list" id="attendee-list"></ul>
         </div>
       </div>
     </div>
