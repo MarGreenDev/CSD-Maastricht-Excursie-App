@@ -1,6 +1,19 @@
 <?php
 session_start();
 include_once 'includes/connection.php';
+
+$favoriteActivities = [];
+if (!empty($_SESSION['user_id'])) {
+    $userId = (int) $_SESSION['user_id'];
+    $stmt = $conn->prepare('SELECT a.id, a.naam, a.datum, a.tijd FROM favorieten f JOIN activiteiten a ON f.activiteit_id = a.id WHERE f.user_id = ? ORDER BY a.datum ASC');
+    if ($stmt) {
+        $stmt->bind_param('i', $userId);
+        $stmt->execute();
+        $favoriteResult = $stmt->get_result();
+        $favoriteActivities = $favoriteResult->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -56,13 +69,41 @@ include_once 'includes/connection.php';
         </div>
         <section id="auth" class="auth-section">
           <div class="auth-card">
-            <p class="eyebrow">Account</p>
-            <h2>Blijf onderweg inloggen</h2>
-            <p class="hero-text">Log in of maak een account om je favoriete plekken te bewaren.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="login.php">Inloggen</a>
-              <a class="btn btn-secondary" href="register.php">Registreren</a>
-            </div>
+            <?php if (!empty($_SESSION['user_id'])): ?>
+              <p class="eyebrow">Jouw favorieten</p>
+              <h2>Geplande activiteiten die jij leuk vindt</h2>
+
+              <?php if (!empty($favoriteActivities)): ?>
+                <ul class="favorite-list">
+                  <?php foreach ($favoriteActivities as $favorite): ?>
+                    <?php $displayDate = !empty($favorite['datum']) ? date('d M Y', strtotime($favorite['datum'])) : 'Binnenkort'; ?>
+                    <?php $displayTime = !empty($favorite['tijd']) ? date('H:i', strtotime($favorite['tijd'])) : 'Tijd nog niet bekend'; ?>
+                    <li class="favorite-item">
+                      <div>
+                        <strong><?= htmlspecialchars($favorite['naam']) ?></strong>
+                        <span><?= htmlspecialchars($displayDate) ?> · <?= htmlspecialchars($displayTime) ?></span>
+                      </div>
+                      <span class="favorite-badge">Ik ga</span>
+                    </li>
+                  <?php endforeach; ?>
+                </ul>
+              <?php else: ?>
+                <p class="hero-text">Je hebt nog geen favorieten. Klik op “Ik ga!” bij een activiteit om hem hier terug te zien.</p>
+              <?php endif; ?>
+
+              <div class="hero-actions">
+                <a class="btn btn-secondary" href="logout.php">Uitloggen</a>
+                <a class="btn btn-primary" href="#activities">Bekijk activiteiten</a>
+              </div>
+            <?php else: ?>
+              <p class="eyebrow">Account</p>
+              <h2>Blijf onderweg inloggen</h2>
+              <p class="hero-text">Log in of maak een account om je favoriete plekken te bewaren.</p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="login.php">Inloggen</a>
+                <a class="btn btn-secondary" href="register.php">Registreren</a>
+              </div>
+            <?php endif; ?>
           </div>
         </section>
 

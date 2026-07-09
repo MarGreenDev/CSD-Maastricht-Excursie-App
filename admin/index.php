@@ -104,12 +104,14 @@ if (isset($_SESSION['user_id'])) {
                         <?= $activiteit['datum'] ?>
                       </td>
                       <td>
-                        <?= $activiteit['tijd'] ?>
+                        <?= htmlspecialchars($activiteit['tijd']) ?>
                       </td>
                       <td>
                         <div class="table-actions">
-                          
-                          <button class="table-btn remove" type="button">Verwijderen</button>
+                          <form action="../verwijder-activiteit.php" method="post" onsubmit="return confirm('Weet je zeker dat je deze activiteit wilt verwijderen?');">
+                            <input type="hidden" name="activiteit_id" value="<?= htmlspecialchars($activiteit['id']) ?>" />
+                            <button class="table-btn remove" type="submit">Verwijderen</button>
+                          </form>
                         </div>
                       </td>
                     </tr>

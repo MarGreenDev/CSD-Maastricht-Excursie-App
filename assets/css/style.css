@@ -457,6 +457,46 @@ body.modal-open {
   margin-top: 0.8rem;
 }
 
+.favorite-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.favorite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(95, 179, 109, 0.12), rgba(60, 143, 79, 0.05));
+  border: 1px solid rgba(95, 179, 109, 0.14);
+}
+
+.favorite-item strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.favorite-item span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.favorite-badge {
+  border-radius: 999px;
+  background: var(--panel-strong);
+  color: var(--accent-strong);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .auth-form input {
   border: 1px solid var(--border);
   border-radius: 14px;
